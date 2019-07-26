@@ -10,6 +10,8 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
+signals:
+    void updateOrder(int);
 };
 
 #endif // MAINWINDOW_H

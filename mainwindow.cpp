@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QtWidgets>
+#include "business.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -8,8 +9,14 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i=0; i< 4; ++i)
         for (int j =0; j<3; ++j)
         {
-            layout->addWidget(new QPushButton(QString::number(i)), j, i);
+            auto btn = new QPushButton(QString::number(i));
+            layout->addWidget(btn, j, i);
+            connect(btn, &QPushButton::clicked, [=]()
+            {
+                emit updateOrder(i);
+            });
         }
+
 }
 
 MainWindow::~MainWindow()
