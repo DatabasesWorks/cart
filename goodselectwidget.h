@@ -11,7 +11,9 @@ public:
 
 signals:
 
-public slots:
+public:
+    const QString pref = "remian number: ";
+    int ncur, nremian;
 };
 
 #endif // GOODSELECTWIDGET_H

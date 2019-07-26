@@ -5,6 +5,9 @@
 #include <map>
 #include <set>
 
+typedef std::multiset<std::string> Order;
+typedef std::pair<std::string, int> Good;
+
 class Business : public QObject
 {
     Q_OBJECT
@@ -16,7 +19,7 @@ signals:
 
 public:
     std::map<std::string, int> m_store;
-    std::vector<std::multiset<std::string>> m_orders;
+    std::vector< Order > m_orders;
 };
 
 #endif // BUSINESS_H

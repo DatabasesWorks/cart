@@ -17,27 +17,31 @@ GoodSelectWidget::GoodSelectWidget(QWidget *parent) : QWidget(parent)
     auto right = new QPushButton("+");
     labellay->addWidget(right, 1, 2, 1, 1);
 
-    QLabel* number = new QLabel("0");
+    QLabel* number = new QLabel(QString::number(ncur));
     number->setAlignment(Qt::AlignCenter);
-    connect(left, &QPushButton::clicked, [=]()
-    {
-        int num = number->text().toInt();
-        number->setText(QString::number(--num));
-    });
-    connect(right, &QPushButton::clicked, [=]()
-    {
-        int num = number->text().toInt();
-        number->setText(QString::number(++num));
-    });
+
     labellay->addWidget(number, 1, 1, 1, 1);
 
-    auto remain = new QLabel("remian number: 5");
+    auto remain = new QLabel(pref + QString::number(nremian));
     remain->setAlignment(Qt::AlignCenter);
     labellay->addWidget(remain, 2, 0, 1, 3);
 
     auto name = new QLabel("good name");
     name->setAlignment(Qt::AlignCenter);
     labellay->addWidget(name, 3, 0, 1, 3);
+
+    connect(left, &QPushButton::clicked, [=]()
+    {
+        int num = number->text().toInt();
+        number->setText(QString::number(--num));
+        remain->setText(pref + QString::number(++nremian));
+    });
+    connect(right, &QPushButton::clicked, [=]()
+    {
+        int num = number->text().toInt();
+        number->setText(QString::number(++num));
+        remain->setText(pref + QString::number(--nremian));
+    });
 
     resize(200,200);
 }

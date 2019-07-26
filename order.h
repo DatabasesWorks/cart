@@ -1,7 +1,8 @@
 #ifndef ORDER_H
 #define ORDER_H
 
-#include <QWidget>
+#include <QtWidgets>
+#include "goodselectwidget.h"
 
 class OrderWidget : public QWidget
 {
@@ -11,7 +12,10 @@ public:
 
 signals:
 
-public slots:
+private:
+    int row, col;
+    QGridLayout* layout;
+    std::vector<GoodSelectWidget*> m_wgoods;
 };
 
 #endif // ORDER_H
