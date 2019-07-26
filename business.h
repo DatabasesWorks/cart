@@ -12,14 +12,18 @@ class Business : public QObject
 {
     Q_OBJECT
 public:
-    explicit Business(QObject *parent = nullptr);
+    static Business& instance();
+private:
+    Business();
     void initStore();
 
 signals:
 
 public:
-    std::vector<Good> m_store;
+    const int size = 20;
+    std::map<std::string, int> m_store;
     std::vector< Order > m_orders;
+    void tryOrder(Order order);
 };
 
 #endif // BUSINESS_H

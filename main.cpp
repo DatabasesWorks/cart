@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
         OrderWidget od;
         Order order{"box"};
-        Business b;
+        Business &b = Business::instance();
         loadFromOrder(&od, b, order);
         od.show();
 

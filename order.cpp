@@ -1,7 +1,7 @@
 #include "order.h"
 #include <QtWidgets>
 
-
+#include "business.h"
 
 OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
 {

@@ -13,7 +13,7 @@ public:
 signals:
 
 public:
-    int row, col;
+    int col = 4;
     QGridLayout* layout;
     std::vector<GoodSelectWidget*> m_wgoods;
 };

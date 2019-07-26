@@ -7,10 +7,13 @@ void addGood(OrderWidget *worder, Good good, Order order)
 
 void loadFromOrder(OrderWidget *worder, Business &business, Order order)
 {
-    for (int i = 0; i< business.m_store.size(); ++i)
+    auto it = business.m_store.begin();
+    for (int i = 0;
+         i< business.m_store.size();
+         ++i, ++it)
 //    for (Good good : business.m_store)
     {
-        Good good = business.m_store[i];
+        Good good = *(it);
         std::string name = good.first;
         worder->m_wgoods[i]->ncur = order.count(name);
         worder->m_wgoods[i]->nremian = good.second;
