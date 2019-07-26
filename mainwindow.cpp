@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i=0; i< 4; ++i)
         for (int j =0; j<3; ++j)
         {
-            auto btn = new QPushButton(QString::number(i));
+            auto btn = new QPushButton();
             layout->addWidget(btn, j, i);
             m_btnOrders.push_back(btn);
             int index = m_btnOrders.size()-1;

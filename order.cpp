@@ -18,7 +18,16 @@ OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
 
 }
 
-void OrderWidget::closeEvent(QCloseEvent *)
+void OrderWidget::closeEvent(QCloseEvent *e)
 {
-    emit updateOrder();
+    int orderSize = 0;
+    for (auto wgood : m_wgoods) orderSize += wgood->ncur;
+    if (orderSize <= capacity)
+    {
+        emit updateOrder();
+    }
+    else
+    {
+        QMessageBox::information(this, "overflow", "too many goods");
+    }
 }
