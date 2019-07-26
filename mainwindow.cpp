@@ -43,6 +43,14 @@ MainWindow::MainWindow(QWidget *parent)
                 {
                     emit updateOrder(index);
                 });
+
+                if (index >= Business::instance().size)
+                {
+                    QSizePolicy sp_retain = btn->sizePolicy();
+                    sp_retain.setRetainSizeWhenHidden(true);
+                    btn->setSizePolicy(sp_retain);
+                    btn->hide();
+                }
             }
     }
 
