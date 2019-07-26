@@ -3,7 +3,7 @@
 
 #include "goodselectwidget.h"
 
-order::order(QWidget *parent) : QWidget(parent)
+OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
 {
     resize(800, 600);
     auto *layout = new QGridLayout(this);

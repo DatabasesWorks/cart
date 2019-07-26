@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 
 
 
-        order od;
+        OrderWidget od;
         od.show();
 
 

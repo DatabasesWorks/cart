@@ -3,11 +3,11 @@
 
 #include <QWidget>
 
-class order : public QWidget
+class OrderWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit order(QWidget *parent = nullptr);
+    explicit OrderWidget(QWidget *parent = nullptr);
 
 signals:
 

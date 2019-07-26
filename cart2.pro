@@ -25,12 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        business.cpp \
         goodselectwidget.cpp \
         main.cpp \
         mainwindow.cpp \
         order.cpp
 
 HEADERS += \
+        business.h \
         goodselectwidget.h \
         mainwindow.h \
         order.h
