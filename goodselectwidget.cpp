@@ -31,5 +31,13 @@ GoodSelectWidget::GoodSelectWidget(QWidget *parent) : QWidget(parent)
     });
     labellay->addWidget(number, 1, 1, 1, 1);
 
+    auto remain = new QLabel("remian number: 5");
+    remain->setAlignment(Qt::AlignCenter);
+    labellay->addWidget(remain, 2, 0, 1, 3);
+
+    auto name = new QLabel("good name");
+    name->setAlignment(Qt::AlignCenter);
+    labellay->addWidget(name, 3, 0, 1, 3);
+
     resize(200,200);
 }
