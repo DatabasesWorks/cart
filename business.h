@@ -18,7 +18,7 @@ public:
 signals:
 
 public:
-    std::map<std::string, int> m_store;
+    std::vector<Good> m_store;
     std::vector< Order > m_orders;
 };
 

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "order.h"
+#include "bridge.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +16,9 @@ int main(int argc, char *argv[])
 
 
         OrderWidget od;
+        Order order{"box"};
+        Business b;
+        loadFromOrder(&od, b, order);
         od.show();
 
 
