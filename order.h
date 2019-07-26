@@ -14,7 +14,7 @@ signals:
     void updateOrder();
 public:
     int col = 4;
-//    const int capacity = 4;
+    const int capacity = 4;
     int cnt = 0;
     QGridLayout* layout;
     std::vector<GoodSelectWidget*> m_wgoods;
