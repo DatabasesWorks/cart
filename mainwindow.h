@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+class QPushButton;
 
 class MainWindow : public QWidget
 {
@@ -12,6 +13,8 @@ public:
     ~MainWindow();
 signals:
     void updateOrder(int);
+public:
+    std::vector<QPushButton*> m_btnOrders;
 };
 
 #endif // MAINWINDOW_H

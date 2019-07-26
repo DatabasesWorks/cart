@@ -11,9 +11,11 @@ MainWindow::MainWindow(QWidget *parent)
         {
             auto btn = new QPushButton(QString::number(i));
             layout->addWidget(btn, j, i);
+            m_btnOrders.push_back(btn);
+            int index = m_btnOrders.size()-1;
             connect(btn, &QPushButton::clicked, [=]()
             {
-                emit updateOrder(i);
+                emit updateOrder(index);
             });
         }
 
