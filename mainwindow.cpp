@@ -36,20 +36,24 @@ MainWindow::MainWindow(QWidget *parent)
             for (int j =0; j<3; ++j)
             {
                 auto btn = new QPushButton(QString::number(stackid*9 + i*3 +j));
-                layout->addWidget(btn, j, i);
-                m_btnOrders.push_back(btn);
-                int index = m_btnOrders.size()-1;
-                connect(btn, &QPushButton::clicked, [=]()
-                {
-                    emit updateOrder(index);
-                });
+                layout->addWidget(btn, i, j);
 
+                int index = m_btnOrders.size();
                 if (index >= Business::instance().size)
                 {
                     QSizePolicy sp_retain = btn->sizePolicy();
                     sp_retain.setRetainSizeWhenHidden(true);
                     btn->setSizePolicy(sp_retain);
                     btn->hide();
+                }
+                else
+                {
+                    m_btnOrders.push_back(btn);
+
+                    connect(btn, &QPushButton::clicked, [=]()
+                    {
+                        emit updateOrder(index);
+                    });
                 }
             }
     }
