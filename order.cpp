@@ -22,12 +22,13 @@ void OrderWidget::closeEvent(QCloseEvent *e)
 {
     int orderSize = 0;
     for (auto wgood : m_wgoods) orderSize += wgood->ncur;
-    if (orderSize <= /*capacity*/1)
+    if (orderSize <= capacity)
     {
         emit updateOrder();
     }
     else
     {
         QMessageBox::information(this, "overflow", "too many goods");
+        e->ignore();
     }
 }

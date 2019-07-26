@@ -14,7 +14,7 @@ signals:
 
 public:
     const QString pref = "remian number: ";
-    int ncur, nremian;
+    int ncur=0, nremian=0;
     std::string name;
 
 private:
