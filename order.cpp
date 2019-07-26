@@ -14,8 +14,6 @@ OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
             layout->addWidget(label, i, j);
             m_wgoods.push_back(label);
         }
-
-
 }
 
 void OrderWidget::closeEvent(QCloseEvent *e)
