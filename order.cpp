@@ -22,7 +22,7 @@ void OrderWidget::closeEvent(QCloseEvent *e)
 {
     int orderSize = 0;
     for (auto wgood : m_wgoods) orderSize += wgood->ncur;
-    if (orderSize <= capacity)
+    if (orderSize <= /*capacity*/1)
     {
         emit updateOrder();
     }
