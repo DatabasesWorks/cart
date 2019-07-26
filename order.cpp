@@ -17,3 +17,8 @@ OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
 
 
 }
+
+void OrderWidget::closeEvent(QCloseEvent *)
+{
+    emit updateOrder();
+}

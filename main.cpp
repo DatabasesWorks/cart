@@ -18,10 +18,18 @@ int main(int argc, char *argv[])
         OrderWidget od;
         Business &b = Business::instance();
 
+        int curorder;
+
         QObject::connect(&w, &MainWindow::updateOrder, [&](int i)
         {
+            curorder = i;
             loadFromOrder(&od, b, b.m_orders[i]);
             od.show();
+        });
+
+        QObject::connect(&od, &OrderWidget::updateOrder, [&]()
+        {
+            backToOrder(&od, b, b.m_orders[curorder]);
         });
 
 

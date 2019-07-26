@@ -33,14 +33,20 @@ GoodSelectWidget::GoodSelectWidget(QWidget *parent) : QWidget(parent)
     connect(left, &QPushButton::clicked, [=]()
     {
 //        int num = number->text().toInt();
-        number->setText(QString::number(--ncur));
-        remain->setText(pref + QString::number(++nremian));
+        if (ncur > 0)
+        {
+            number->setText(QString::number(--ncur));
+            remain->setText(pref + QString::number(++nremian));
+        }
     });
     connect(right, &QPushButton::clicked, [=]()
     {
 //        int num = number->text().toInt();
-        number->setText(QString::number(++ncur));
-        remain->setText(pref + QString::number(--nremian));
+        if (nremian > 0)
+        {
+            number->setText(QString::number(++ncur));
+            remain->setText(pref + QString::number(--nremian));
+        }
     });
 
     resize(200,200);
