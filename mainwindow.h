@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "business.h"
 class QPushButton;
 
 class MainWindow : public QWidget
@@ -11,6 +12,7 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void setOrderIcon(int index, Order order);
 signals:
     void updateOrder(int);
 public:

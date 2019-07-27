@@ -33,7 +33,8 @@ int main(int argc, char *argv[])
             backToOrder(&od, b, b.m_orders[curorder]);
             std::string order;
             for (auto good : b.m_orders[curorder]) order += (good + " ");
-            w.m_btnOrders[curorder]->setText(QString::fromStdString(order));
+            w.setOrderIcon(curorder, b.m_orders[curorder]);
+//            w.m_btnOrders[curorder]->setText(QString::fromStdString(order));
         });
 
 
