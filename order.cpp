@@ -23,7 +23,7 @@ OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
             modelMenu.addAction(txtBoxAction);
         }
 
-        modelMenu.exec(cart->mapToGlobal(QPoint(0,0)));
+        modelMenu.exec(cart->mapToGlobal(QPoint(0,cart->height())));
 
     });
 

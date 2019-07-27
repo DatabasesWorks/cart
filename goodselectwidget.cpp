@@ -98,3 +98,8 @@ void GoodSelectWidget::showGood(QString name)
 {
 
 }
+
+void GoodSelectWidget::mouseReleaseEvent(QMouseEvent *)
+{
+
+}

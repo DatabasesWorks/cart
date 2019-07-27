@@ -12,6 +12,8 @@ public:
 
     void showGood(QString name);
 
+    void mouseReleaseEvent(QMouseEvent*) override;
+
 signals:
 
 public:
