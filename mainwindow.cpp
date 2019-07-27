@@ -6,8 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
     auto layoutall = new QGridLayout(this);
-    auto left = new QPushButton;
-    auto right = new QPushButton;
+    auto left = new QPushButton("<");
+    auto right = new QPushButton(">");
     auto central = new QStackedWidget;
     layoutall->addWidget(left,0,0);
     layoutall->addWidget(right,0,2);

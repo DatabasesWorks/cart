@@ -30,6 +30,17 @@ GoodSelectWidget::GoodSelectWidget(QWidget *parent) : QWidget(parent)
     wname->setAlignment(Qt::AlignCenter);
     labellay->addWidget(wname, 3, 0, 1, 3);
 
+    auto setRound = [](QPushButton *btn)
+    {
+        QRect rect(2,2,32,32);
+            QRegion region(rect, QRegion::Ellipse);
+            btn->setFixedSize(36,36);
+            btn->setMask(region);
+    };
+
+    setRound(left);
+    setRound(right);
+
     connect(left, &QPushButton::clicked, [=]()
     {
 //        int num = number->text().toInt();
