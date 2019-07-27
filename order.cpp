@@ -29,6 +29,7 @@ OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
             central->setCurrentIndex(id+1);
     });
 
+    auto it = Business::instance().m_store.begin();
     for (int stackid = 0; stackid < 2; ++stackid)
     {
         auto widget = new QWidget;
@@ -39,9 +40,17 @@ OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
             for (int j =0; j<4; ++j)
             {
                 int index = m_wgoods.size()+1;
-                auto goodpicname = "./icon/goods/" +
-                        QString::number(index)+".png";
+
+                QString goodpicname;
+
+                if (it != Business::instance().m_store.end())
+                {
+                    goodpicname = "./icon/goods/" +
+                            QString::fromStdString(it->first)+".png";
+                    it++;
+                }
                 auto label = new GoodSelectWidget(goodpicname);
+
 
                 layout->addWidget(label, i, j);
                 m_wgoods.push_back(label);

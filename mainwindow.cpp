@@ -86,7 +86,7 @@ void MainWindow::setOrderIcon(int index, Order order)
                                Business::instance().m_store.find(good));
 
         auto goodpicname = "./icon/goods/" +
-                QString::number(id+1)+".png";
+                QString::fromStdString(good)+".png";
 
         goods[cnt] = QPixmap::fromImage(QImage(goodpicname).scaled(150,100));
     }

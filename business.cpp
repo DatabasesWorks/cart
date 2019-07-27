@@ -1,4 +1,5 @@
 #include "business.h"
+#include <QDir>
 
 Business &Business::instance()
 {
@@ -14,25 +15,19 @@ Business::Business()
 
 void Business::initStore()
 {
+    QDir dirOfGoods("./icon/goods");
 
-    m_store = {
-        {"box", 5},
-        {"noodle", 5},
-        {"ball", 5},
-        {"soap", 5},
-        {"a", 5},
-        {"b", 5},
-        {"c", 5},
-        {"d", 5},
-        {"e", 5},
-        {"f", 5},
-        {"g", 5},
-        {"h", 5},
+    QStringList list = dirOfGoods.entryList();
 
-        {"i", 5},
-        {"j", 5},
-        {"k", 5},
-    };
+    for (QString file : list)
+    {
+        if (file.endsWith(".png", Qt::CaseInsensitive))
+        {
+            QString main = file.left(file.size()-4);
+            m_store.insert({main.toStdString(), 5});
+        }
+    }
+
 }
 
 void Business::tryOrder(Order order)
