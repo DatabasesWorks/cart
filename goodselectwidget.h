@@ -10,6 +10,8 @@ public:
     explicit GoodSelectWidget(QString name, QWidget *parent = nullptr);
     void updateUI();
 
+    void showGood(QString name);
+
 signals:
 
 public:
