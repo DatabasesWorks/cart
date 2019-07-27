@@ -7,7 +7,7 @@ class GoodSelectWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GoodSelectWidget(QWidget *parent = nullptr);
+    explicit GoodSelectWidget(QString name, QWidget *parent = nullptr);
     void updateUI();
 
 signals:
@@ -19,6 +19,7 @@ public:
 
 private:
     QLabel *number, *remain, *wname;
+    QLabel* pic;
 };
 
 #endif // GOODSELECTWIDGET_H

@@ -16,7 +16,7 @@ public:
     int col = 4;
     const int capacity = 4;
     int cnt = 0;
-    QGridLayout* layout;
+//    QGridLayout* layout;
     std::vector<GoodSelectWidget*> m_wgoods;
 
     void closeEvent(QCloseEvent *) override;

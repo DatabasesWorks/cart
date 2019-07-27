@@ -1,5 +1,30 @@
 <RCC>
     <qresource prefix="/">
         <file>img/cart2.jpg</file>
+        <file>icon/goods/54654t.png</file>
+        <file>icon/goods/c'f'd.png</file>
+        <file>icon/goods/IMG_20190719_162133.png</file>
+        <file>icon/goods/IMG_20190719_162153.png</file>
+        <file>icon/goods/IMG_20190719_162311.png</file>
+        <file>icon/goods/IMG_20190719_162336.png</file>
+        <file>icon/goods/TB2LaE3cYPpK1RjSZFFXXa5PpXa_!!725677994-0-sm.png</file>
+        <file>icon/goods/timg.png</file>
+        <file>icon/goods/timg3ER6EW8D.png</file>
+        <file>icon/goods/timg4FU00422.png</file>
+        <file>icon/goods/timgE9TKJ5N5.png</file>
+        <file>icon/goods/timgKKVYLCJX.png</file>
+        <file>icon/goods/timgLRPPM01P.png</file>
+        <file>icon/goods/timgP1J9M1DI.png</file>
+        <file>icon/goods/timgY8XMUI0L.png</file>
+        <file>icon/logo.png</file>
+        <file>icon/下拉键.png</file>
+        <file>icon/删除.png</file>
+        <file>icon/底部栏.png</file>
+        <file>icon/提示.png</file>
+        <file>icon/料框.png</file>
+        <file>icon/用户.png</file>
+        <file>icon/顶部栏.png</file>
+        <file>icon/add.png</file>
+        <file>icon/sub.png</file>
     </qresource>
 </RCC>

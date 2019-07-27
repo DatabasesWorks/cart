@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
 
 
         OrderWidget od;
+//        od.show();
         Business &b = Business::instance();
 
         int curorder;

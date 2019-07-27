@@ -1,20 +1,32 @@
 #include "goodselectwidget.h"
 #include <QtWidgets>
 
-GoodSelectWidget::GoodSelectWidget(QWidget *parent) : QWidget(parent)
+GoodSelectWidget::GoodSelectWidget(QString name, QWidget *parent) : QWidget(parent)
 {
     auto labellay = new QGridLayout(this);
 
-    QImage img(":/img/cart2.jpg");
+    QImage img(name);
     img = img.scaled(200,200);
-    QLabel* pic = new QLabel();
+    pic = new QLabel();
     pic->setPixmap(QPixmap::fromImage(img));
 
     labellay->addWidget(pic, 0, 0, 1, 3);
 
-    auto left = new QPushButton("-");
+    auto left = new QPushButton("");
     labellay->addWidget(left, 1, 0, 1, 1);
-    auto right = new QPushButton("+");
+    auto right = new QPushButton("");
+//    right->setStyleSheet("QPushButton {\
+//                         color: #333;\
+//                         border: 2px solid #555;\
+//                         border-radius: 20px;\
+//                         border-style: outset;\
+//                         background: qradialgradient(\
+//                             cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,\
+//                             radius: 1.35, stop: 0 #fff, stop: 1 #888\
+//                             );\
+//                         padding: 5px;\
+//                         }"
+//                         );
     labellay->addWidget(right, 1, 2, 1, 1);
 
     number = new QLabel(QString::number(ncur));
@@ -38,8 +50,20 @@ GoodSelectWidget::GoodSelectWidget(QWidget *parent) : QWidget(parent)
             btn->setMask(region);
     };
 
-    setRound(left);
-    setRound(right);
+//    setRound(left);
+//    setRound(right);
+
+    auto seticon = [](QPushButton *btn, QString icon)
+    {
+        QPixmap pixmap(icon);
+        QIcon ButtonIcon(pixmap.scaled(36, 36));
+        btn->setIcon(ButtonIcon);
+        btn->setIconSize(QSize(36, 36));
+    };
+
+    seticon(left, "./icon/sub.png");
+    seticon(right, "./icon/add.png");
+
 
     connect(left, &QPushButton::clicked, [=]()
     {
