@@ -4,6 +4,7 @@
 #include <QObject>
 #include <map>
 #include <set>
+#include <iostream>
 
 typedef std::multiset<QString> Order;
 typedef std::pair<QString, int> Good;

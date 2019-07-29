@@ -32,7 +32,14 @@ void Business::initStore()
 
 void Business::orderSub(Order *order, QString name)
 {
-    order->erase(name);
+    int id = order - m_orders.data();
+    std::cerr<<"order "<<id<<" sub "<<name.toStdString()<<std::endl;
+    {
+        //will erase all
+        //order->erase(name);
+        //will erase all
+        order->erase(order->find(name));
+    }
     m_store[name]++;
     emit orderChanged(order);
 }

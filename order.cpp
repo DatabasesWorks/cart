@@ -24,7 +24,7 @@ OrderWidget::OrderWidget()
             goods.insert(good);
 
             auto *txtBoxAction = new QWidgetAction(&modelMenu);
-            auto goodline = new GoodRowWidget();
+            auto goodline = new GoodRowWidget(porder);
             goodline->setGood(good, *porder);
             txtBoxAction->setDefaultWidget(goodline);
 

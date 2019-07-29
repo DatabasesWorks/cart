@@ -1,12 +1,22 @@
 #include "goodrowwidget.h"
 
-GoodRowWidget::GoodRowWidget(QWidget *parent) : QWidget(parent)
+GoodRowWidget::GoodRowWidget(Order *&order) :
+porder(order)
 {
-
+    connect(&Business::instance(), &Business::orderChanged,
+            this /*use this to disconnect the connection*/,
+            [this](Order* pcorder)
+    {
+        if (pcorder == porder)
+        {
+            m_cnt->setText(QString::number(porder->count(m_name)));
+        }
+    });
 }
 
 void GoodRowWidget::setGood(QString good, Order order)
 {
+    m_name = good;
     QString goodQstr = (good);
     auto lay = new QHBoxLayout(this);
 
@@ -43,6 +53,29 @@ void GoodRowWidget::setGood(QString good, Order order)
 
     setRound(m_sub);
     setRound(m_add);
+
+    connect(m_sub, &QPushButton::clicked, [=]()
+    {
+//        int num = number->text().toInt();
+        if (porder->count(m_name))
+        {
+            Business::instance().orderSub(porder, m_name);
+//            number->setText(QString::number(--ncur));
+//            remain->setText(pref + QString::number(++nremian));
+//            porder->erase(porder->find(name));
+//            Business::instance().orderChanged(porder);
+        }
+    });
+    connect(m_add, &QPushButton::clicked, [=]()
+    {
+//        int num = number->text().toInt();
+        if (Business::instance().m_store.at(m_name)>0)
+        {
+            Business::instance().orderAdd(porder, m_name);
+//            number->setText(QString::number(++ncur));
+//            remain->setText(pref + QString::number(--nremian));
+        }
+    });
 
     m_cnt = new QLabel(QString::number(order.count(good)));
 
