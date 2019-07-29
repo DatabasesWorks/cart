@@ -2,6 +2,7 @@
 #include <QtWidgets>
 
 #include "business.h"
+#include "goodrowwidget.h"
 
 OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
 {
@@ -19,7 +20,11 @@ OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
         for (int i=0; i<2; ++i)
         {
             auto *txtBoxAction = new QWidgetAction(&modelMenu);
-            txtBoxAction->setDefaultWidget(new GoodSelectWidget("./icon/goods/OLAY.png"));
+            auto goodline = new GoodRowWidget();
+            Order order = {"OLAY", "OLAY"};
+            goodline->setGood("OLAY", order);
+            txtBoxAction->setDefaultWidget(goodline);
+
             modelMenu.addAction(txtBoxAction);
         }
 

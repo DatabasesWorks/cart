@@ -44,21 +44,21 @@ GoodSelectWidget::GoodSelectWidget(QString name, QWidget *parent) : QWidget(pare
 
     auto setRound = [](QPushButton *btn)
     {
-        QRect rect(2,2,32,32);
+        QRect rect(2,2,34,34);
             QRegion region(rect, QRegion::Ellipse);
-            btn->setFixedSize(36,36);
+            btn->setFixedSize(38,38);
             btn->setMask(region);
     };
 
-//    setRound(left);
-//    setRound(right);
+    setRound(left);
+    setRound(right);
 
     auto seticon = [](QPushButton *btn, QString icon)
     {
         QPixmap pixmap(icon);
         QIcon ButtonIcon(pixmap.scaled(36, 36));
         btn->setIcon(ButtonIcon);
-        btn->setIconSize(QSize(36, 36));
+        btn->setIconSize(QSize(30, 30));
     };
 
     seticon(left, "./icon/sub.png");

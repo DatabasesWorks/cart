@@ -100,6 +100,7 @@ void MainWindow::setOrderIcon(int index, Order order)
 
 
 
+    m_btnOrders[index]->setText("");
     m_btnOrders[index]->setIcon(QIcon(all));
     m_btnOrders[index]->setIconSize(QSize(300, 200));
 }

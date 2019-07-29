@@ -27,16 +27,20 @@ CONFIG += c++11
 SOURCES += \
         bridge.cpp \
         business.cpp \
+        goodrowwidget.cpp \
         goodselectwidget.cpp \
         main.cpp \
         mainwindow.cpp \
+        norwegianwoodstyle.cpp \
         order.cpp
 
 HEADERS += \
         bridge.h \
         business.h \
+        goodrowwidget.h \
         goodselectwidget.h \
         mainwindow.h \
+        norwegianwoodstyle.h \
         order.h
 
 # Default rules for deployment.
