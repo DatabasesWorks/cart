@@ -1,5 +1,6 @@
 #include "business.h"
 #include <QDir>
+#include <QtWidgets>
 
 Business &Business::instance()
 {
@@ -46,6 +47,12 @@ void Business::orderSub(Order *order, QString name)
 
 void Business::orderAdd(Order *order, QString name)
 {
+    if (order->size()>=4)
+    {
+        QMessageBox::information(nullptr, "Overflow", "Too many goods!\n"
+                                                      "One order can contain at most 4 goods.");
+        return;
+    }
     order->insert(name);
     m_store[name]--;
     emit orderChanged(order);
