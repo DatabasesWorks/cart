@@ -57,21 +57,3 @@ void Business::orderAdd(Order *order, QString name)
     m_store[name]--;
     emit orderChanged(order);
 }
-
-void Business::tryOrder(Order order)
-{
-    auto backup = m_store;
-    for (QString good : order)
-    {
-        if (m_store.find(good)!=m_store.end() &&
-                m_store[good] > 0)
-        {
-            m_store[good]--;
-        }
-        else
-        {
-            m_store = backup;
-        }
-    }
-    m_orders.push_back(order);
-}

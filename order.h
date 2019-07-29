@@ -12,7 +12,6 @@ public:
     explicit OrderWidget();
 
     void loadFromOrder(Order *order);
-    void backToOrder();
 
 signals:
     void updateOrder();

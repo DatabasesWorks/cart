@@ -144,8 +144,3 @@ void OrderWidget::loadFromOrder(Order *order)
     }
 }
 
-void OrderWidget::backToOrder()
-{
-    //already done!!
-
-}

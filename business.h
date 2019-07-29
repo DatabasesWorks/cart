@@ -29,7 +29,6 @@ public:
     const int size = 20;
     std::map<QString, int> m_store;
     std::vector< Order > m_orders;
-    void tryOrder(Order order);
 };
 
 #endif // BUSINESS_H

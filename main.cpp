@@ -35,7 +35,6 @@ int main(int argc, char *argv[])
 
         QObject::connect(&od, &OrderWidget::updateOrder, [&]()
         {
-            od.backToOrder();
 //            backToOrder(&od, b, b.m_orders[curorder]);
             QString order;
             for (auto good : b.m_orders[curorder]) order += (good + " ");
