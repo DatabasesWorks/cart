@@ -41,12 +41,12 @@ GoodSelectWidget::GoodSelectWidget(QString Picname, Order *&order, QWidget *pare
 //                         );
     labellay->addWidget(right, 1, 2, 1, 1);
 
-    number = new QLabel(QString::number(ncur));
+    number = new QLabel();
     number->setAlignment(Qt::AlignCenter);
 
     labellay->addWidget(number, 1, 1, 1, 1);
 
-    remain = new QLabel(pref + QString::number(nremian));
+    remain = new QLabel();
     remain->setAlignment(Qt::AlignCenter);
     labellay->addWidget(remain, 2, 0, 1, 3);
 
@@ -80,7 +80,7 @@ GoodSelectWidget::GoodSelectWidget(QString Picname, Order *&order, QWidget *pare
     connect(left, &QPushButton::clicked, [=]()
     {
 //        int num = number->text().toInt();
-        if (ncur > 0)
+        if (porder->count(name))
         {
             Business::instance().orderSub(porder, name);
 //            number->setText(QString::number(--ncur));
@@ -92,7 +92,7 @@ GoodSelectWidget::GoodSelectWidget(QString Picname, Order *&order, QWidget *pare
     connect(right, &QPushButton::clicked, [=]()
     {
 //        int num = number->text().toInt();
-        if (nremian > 0)
+        if (Business::instance().m_store.at(name)>0)
         {
             Business::instance().orderAdd(porder, name);
 //            number->setText(QString::number(++ncur));
@@ -105,8 +105,9 @@ GoodSelectWidget::GoodSelectWidget(QString Picname, Order *&order, QWidget *pare
 
 void GoodSelectWidget::updateUI()
 {
-    number->setText(QString::number(ncur));
-    remain->setText(pref + QString::number(nremian));
+    number->setText(QString::number(porder->count(name)));
+    if (Business::instance().m_store.count(name))
+        remain->setText(pref + QString::number(Business::instance().m_store.at(name)));
     wname->setText((name));
 }
 

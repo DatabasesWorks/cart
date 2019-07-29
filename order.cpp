@@ -113,7 +113,7 @@ OrderWidget::OrderWidget()
 void OrderWidget::closeEvent(QCloseEvent *e)
 {
     int orderSize = 0;
-    for (auto wgood : m_wgoods) orderSize += wgood->ncur;
+//    for (auto wgood : m_wgoods) orderSize += wgood->ncur;
     if (orderSize <= capacity)
     {
         emit updateOrder();
@@ -137,8 +137,8 @@ void OrderWidget::loadFromOrder(Order *order)
     {
         Good good = *(it);
         QString name = good.first;
-        m_wgoods[i]->ncur = order->count(name);
-        m_wgoods[i]->nremian = good.second;
+//        m_wgoods[i]->ncur = order->count(name);
+//        m_wgoods[i]->nremian = good.second;
         m_wgoods[i]->name = name;
         m_wgoods[i]->updateUI();
     }
@@ -146,16 +146,6 @@ void OrderWidget::loadFromOrder(Order *order)
 
 void OrderWidget::backToOrder()
 {
-    auto &business = Business::instance();
-    porder->clear();
-    auto it = business.m_store.begin();
-    for (int i = 0;
-         i< business.m_store.size();
-         ++i, ++it)
-//    for (Good good : business.m_store)
-    {
-        QString name = it->first;
-        for (int j=0; j< m_wgoods[i]->ncur; ++j) porder->insert(name);
-        it->second = m_wgoods[i]->nremian;
-    }
+    //already done!!
+
 }

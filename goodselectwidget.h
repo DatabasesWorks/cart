@@ -21,7 +21,7 @@ signals:
 
 public:
     const QString pref = "remian number: ";
-    int ncur=0, nremian=0;
+//    int ncur=0, nremian=0;
     QString name;
 
 private:
