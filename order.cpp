@@ -17,16 +17,30 @@ OrderWidget::OrderWidget()
     connect(cart, &QPushButton::clicked, [=]()
     {
         QMenu modelMenu;
-        for (int i=0; i<2; ++i)
+        std::set<QString> goods;
+        for (auto good : *porder)
         {
+            if (goods.count(good) > 0) continue;
+            goods.insert(good);
+
             auto *txtBoxAction = new QWidgetAction(&modelMenu);
             auto goodline = new GoodRowWidget();
-            Order order = {"双汇", "OLAY"};
-            goodline->setGood("双汇", order);
+            goodline->setGood(good, *porder);
             txtBoxAction->setDefaultWidget(goodline);
 
             modelMenu.addAction(txtBoxAction);
+
         }
+//        for (int i=0; i<2; ++i)
+//        {
+//            auto *txtBoxAction = new QWidgetAction(&modelMenu);
+//            auto goodline = new GoodRowWidget();
+//            Order order = {"双汇", "OLAY"};
+//            goodline->setGood("双汇", order);
+//            txtBoxAction->setDefaultWidget(goodline);
+
+//            modelMenu.addAction(txtBoxAction);
+//        }
 
         modelMenu.exec(cart->mapToGlobal(QPoint(0,cart->height())));
 
@@ -73,11 +87,13 @@ OrderWidget::OrderWidget()
                             (it->first)+".png";
                     it++;
                 }
-                auto label = new GoodSelectWidget(goodpicname);
+                auto label = new GoodSelectWidget(goodpicname, porder);
 
 
                 layout->addWidget(label, i, j);
+                label->setOrder(porder);
                 m_wgoods.push_back(label);
+                label->setOrder(porder);
 
                 QSizePolicy sp_retain = label->sizePolicy();
                 sp_retain.setRetainSizeWhenHidden(true);

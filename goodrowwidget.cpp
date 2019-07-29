@@ -12,8 +12,10 @@ void GoodRowWidget::setGood(QString good, Order order)
 
     m_goodImg = new QLabel;
     m_goodImg->setPixmap(QPixmap::fromImage(QImage("./icon/goods/"+goodQstr+".png").scaled(100,100)));
+    m_goodImg->setFixedSize(100,100);
 
     m_goodName = new QLabel(goodQstr);
+    m_goodName->setFixedSize(100,100);
 
     auto setRound = [](QPushButton *btn)
     {

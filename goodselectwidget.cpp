@@ -1,11 +1,23 @@
 #include "goodselectwidget.h"
 #include <QtWidgets>
 
-GoodSelectWidget::GoodSelectWidget(QString name, QWidget *parent) : QWidget(parent)
+GoodSelectWidget::GoodSelectWidget(QString Picname, Order *&order, QWidget *parent) : QWidget(parent),
+    porder(order)
 {
+    porder = order;
+
+    connect(&Business::instance(), &Business::orderChanged, [this](Order* pcorder)
+    {
+        if (pcorder == porder)
+        {
+            number->setText(QString::number(porder->count(name)));
+            if (Business::instance().m_store.count(name)) remain->setText(QString::number(Business::instance().m_store.at(name)));
+        }
+    });
     auto labellay = new QGridLayout(this);
 
-    QImage img(name);
+    int id = porder - Business::instance().m_orders.data();
+    QImage img(Picname);
     img = img.scaled(200,200);
     pic = new QLabel();
     pic->setPixmap(QPixmap::fromImage(img));
@@ -70,8 +82,11 @@ GoodSelectWidget::GoodSelectWidget(QString name, QWidget *parent) : QWidget(pare
 //        int num = number->text().toInt();
         if (ncur > 0)
         {
-            number->setText(QString::number(--ncur));
-            remain->setText(pref + QString::number(++nremian));
+            Business::instance().orderSub(porder, name);
+//            number->setText(QString::number(--ncur));
+//            remain->setText(pref + QString::number(++nremian));
+//            porder->erase(porder->find(name));
+//            Business::instance().orderChanged(porder);
         }
     });
     connect(right, &QPushButton::clicked, [=]()
@@ -79,8 +94,9 @@ GoodSelectWidget::GoodSelectWidget(QString name, QWidget *parent) : QWidget(pare
 //        int num = number->text().toInt();
         if (nremian > 0)
         {
-            number->setText(QString::number(++ncur));
-            remain->setText(pref + QString::number(--nremian));
+            Business::instance().orderAdd(porder, name);
+//            number->setText(QString::number(++ncur));
+//            remain->setText(pref + QString::number(--nremian));
         }
     });
 
@@ -102,4 +118,9 @@ void GoodSelectWidget::showGood(QString name)
 void GoodSelectWidget::mouseReleaseEvent(QMouseEvent *)
 {
 
+}
+
+void GoodSelectWidget::setOrder(Order *order)
+{
+    porder = order;
 }

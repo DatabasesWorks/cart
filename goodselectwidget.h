@@ -2,17 +2,20 @@
 #define GOODSELECTWIDGET_H
 
 #include <QtWidgets>
+#include "business.h"
 
 class GoodSelectWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GoodSelectWidget(QString name, QWidget *parent = nullptr);
+    explicit GoodSelectWidget(QString Picname, Order *&porder, QWidget *parent = nullptr);
     void updateUI();
 
     void showGood(QString name);
 
     void mouseReleaseEvent(QMouseEvent*) override;
+
+    void setOrder(Order* order);
 
 signals:
 
@@ -24,6 +27,7 @@ public:
 private:
     QLabel *number, *remain, *wname;
     QLabel* pic;
+    Order* &porder;
 };
 
 #endif // GOODSELECTWIDGET_H

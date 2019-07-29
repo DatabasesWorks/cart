@@ -13,11 +13,16 @@ class Business : public QObject
     Q_OBJECT
 public:
     static Business& instance();
+    void orderSub(Order *order, QString name);
+    void orderAdd(Order *order, QString name);
+
 private:
     Business();
     void initStore();
 
+
 signals:
+    void orderChanged(Order* order);
 
 public:
     const int size = 20;

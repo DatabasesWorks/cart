@@ -30,6 +30,20 @@ void Business::initStore()
 
 }
 
+void Business::orderSub(Order *order, QString name)
+{
+    order->erase(name);
+    m_store[name]++;
+    emit orderChanged(order);
+}
+
+void Business::orderAdd(Order *order, QString name)
+{
+    order->insert(name);
+    m_store[name]--;
+    emit orderChanged(order);
+}
+
 void Business::tryOrder(Order order)
 {
     auto backup = m_store;
