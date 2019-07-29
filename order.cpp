@@ -4,7 +4,7 @@
 #include "business.h"
 #include "goodrowwidget.h"
 
-OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
+OrderWidget::OrderWidget()
 {
     resize(800, 600);
     auto layoutall = new QGridLayout(this);
@@ -21,8 +21,8 @@ OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
         {
             auto *txtBoxAction = new QWidgetAction(&modelMenu);
             auto goodline = new GoodRowWidget();
-            Order order = {"OLAY", "OLAY"};
-            goodline->setGood("OLAY", order);
+            Order order = {"双汇", "OLAY"};
+            goodline->setGood("双汇", order);
             txtBoxAction->setDefaultWidget(goodline);
 
             modelMenu.addAction(txtBoxAction);
@@ -106,5 +106,40 @@ void OrderWidget::closeEvent(QCloseEvent *e)
     {
         QMessageBox::information(this, "overflow", "too many goods");
         e->ignore();
+    }
+}
+
+void OrderWidget::loadFromOrder(Order *order)
+{
+    porder = order;
+    auto &business = Business::instance();
+    auto it = business.m_store.begin();
+    for (int i = 0;
+         i< business.m_store.size();
+         ++i, ++it)
+//    for (Good good : business.m_store)
+    {
+        Good good = *(it);
+        QString name = good.first;
+        m_wgoods[i]->ncur = order->count(name);
+        m_wgoods[i]->nremian = good.second;
+        m_wgoods[i]->name = name;
+        m_wgoods[i]->updateUI();
+    }
+}
+
+void OrderWidget::backToOrder()
+{
+    auto &business = Business::instance();
+    porder->clear();
+    auto it = business.m_store.begin();
+    for (int i = 0;
+         i< business.m_store.size();
+         ++i, ++it)
+//    for (Good good : business.m_store)
+    {
+        QString name = it->first;
+        for (int j=0; j< m_wgoods[i]->ncur; ++j) porder->insert(name);
+        it->second = m_wgoods[i]->nremian;
     }
 }

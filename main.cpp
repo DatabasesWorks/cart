@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "order.h"
-#include "bridge.h"
+//#include "bridge.h"
 
 #include "norwegianwoodstyle.h"
 
@@ -28,13 +28,15 @@ int main(int argc, char *argv[])
         QObject::connect(&w, &MainWindow::updateOrder, [&](int i)
         {
             curorder = i;
-            loadFromOrder(&od, b, b.m_orders[i]);
+            od.loadFromOrder(&(b.m_orders[i]));
+//            loadFromOrder(&od, b, b.m_orders[i]);
             od.show();
         });
 
         QObject::connect(&od, &OrderWidget::updateOrder, [&]()
         {
-            backToOrder(&od, b, b.m_orders[curorder]);
+            od.backToOrder();
+//            backToOrder(&od, b, b.m_orders[curorder]);
             QString order;
             for (auto good : b.m_orders[curorder]) order += (good + " ");
             w.setOrderIcon(curorder, b.m_orders[curorder]);

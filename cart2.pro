@@ -25,7 +25,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        bridge.cpp \
         business.cpp \
         goodrowwidget.cpp \
         goodselectwidget.cpp \
@@ -35,7 +34,6 @@ SOURCES += \
         order.cpp
 
 HEADERS += \
-        bridge.h \
         business.h \
         goodrowwidget.h \
         goodselectwidget.h \

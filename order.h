@@ -3,12 +3,16 @@
 
 #include <QtWidgets>
 #include "goodselectwidget.h"
+#include "business.h"
 
 class OrderWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit OrderWidget(QWidget *parent = nullptr);
+    explicit OrderWidget();
+
+    void loadFromOrder(Order *order);
+    void backToOrder();
 
 signals:
     void updateOrder();
@@ -20,6 +24,8 @@ public:
     std::vector<GoodSelectWidget*> m_wgoods;
 
     void closeEvent(QCloseEvent *) override;
+
+    Order *porder;
 };
 
 #endif // ORDER_H
