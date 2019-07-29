@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
         QObject::connect(&od, &OrderWidget::updateOrder, [&]()
         {
             backToOrder(&od, b, b.m_orders[curorder]);
-            std::string order;
+            QString order;
             for (auto good : b.m_orders[curorder]) order += (good + " ");
             w.setOrderIcon(curorder, b.m_orders[curorder]);
 //            w.m_btnOrders[curorder]->setText(QString::fromStdString(order));

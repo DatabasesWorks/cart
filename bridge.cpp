@@ -9,7 +9,7 @@ void loadFromOrder(OrderWidget *worder, Business &business, Order order)
 //    for (Good good : business.m_store)
     {
         Good good = *(it);
-        std::string name = good.first;
+        QString name = good.first;
         worder->m_wgoods[i]->ncur = order.count(name);
         worder->m_wgoods[i]->nremian = good.second;
         worder->m_wgoods[i]->name = name;
@@ -26,7 +26,7 @@ void backToOrder(OrderWidget *worder, Business &business, Order &order)
          ++i, ++it)
 //    for (Good good : business.m_store)
     {
-        std::string name = it->first;
+        QString name = it->first;
         for (int j=0; j< worder->m_wgoods[i]->ncur; ++j) order.insert(name);
         it->second = worder->m_wgoods[i]->nremian;
     }

@@ -5,8 +5,8 @@
 #include <map>
 #include <set>
 
-typedef std::multiset<std::string> Order;
-typedef std::pair<std::string, int> Good;
+typedef std::multiset<QString> Order;
+typedef std::pair<QString, int> Good;
 
 class Business : public QObject
 {
@@ -21,7 +21,7 @@ signals:
 
 public:
     const int size = 20;
-    std::map<std::string, int> m_store;
+    std::map<QString, int> m_store;
     std::vector< Order > m_orders;
     void tryOrder(Order order);
 };

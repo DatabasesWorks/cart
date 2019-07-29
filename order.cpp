@@ -70,7 +70,7 @@ OrderWidget::OrderWidget(QWidget *parent) : QWidget(parent)
                 if (it != Business::instance().m_store.end())
                 {
                     goodpicname = "./icon/goods/" +
-                            QString::fromStdString(it->first)+".png";
+                            (it->first)+".png";
                     it++;
                 }
                 auto label = new GoodSelectWidget(goodpicname);

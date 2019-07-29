@@ -24,7 +24,7 @@ void Business::initStore()
         if (file.endsWith(".png", Qt::CaseInsensitive))
         {
             QString main = file.left(file.size()-4);
-            m_store.insert({main.toStdString(), 5});
+            m_store.insert({main, 5});
         }
     }
 
@@ -33,7 +33,7 @@ void Business::initStore()
 void Business::tryOrder(Order order)
 {
     auto backup = m_store;
-    for (std::string good : order)
+    for (QString good : order)
     {
         if (m_store.find(good)!=m_store.end() &&
                 m_store[good] > 0)

@@ -9,7 +9,7 @@ class GoodRowWidget : public QWidget
     Q_OBJECT
 public:
     explicit GoodRowWidget(QWidget *parent = nullptr);
-    void setGood(std::string good, Order order);
+    void setGood(QString good, Order order);
 
     void mouseReleaseEvent(QMouseEvent*) override;
 

@@ -19,7 +19,7 @@ signals:
 public:
     const QString pref = "remian number: ";
     int ncur=0, nremian=0;
-    std::string name;
+    QString name;
 
 private:
     QLabel *number, *remain, *wname;

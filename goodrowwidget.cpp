@@ -5,9 +5,9 @@ GoodRowWidget::GoodRowWidget(QWidget *parent) : QWidget(parent)
 
 }
 
-void GoodRowWidget::setGood(std::string good, Order order)
+void GoodRowWidget::setGood(QString good, Order order)
 {
-    QString goodQstr = QString::fromStdString(good);
+    QString goodQstr = (good);
     auto lay = new QHBoxLayout(this);
 
     m_goodImg = new QLabel;

@@ -79,14 +79,14 @@ void MainWindow::setOrderIcon(int index, Order order)
 
 //    for (int i=0; i< order.size(); ++i)
     int cnt = -1;
-    for (std::string good : order)
+    for (QString good : order)
     {
         cnt++;
         int id = std::distance(Business::instance().m_store.begin(),
                                Business::instance().m_store.find(good));
 
         auto goodpicname = "./icon/goods/" +
-                QString::fromStdString(good)+".png";
+                (good)+".png";
 
         goods[cnt] = QPixmap::fromImage(QImage(goodpicname).scaled(150,100));
     }

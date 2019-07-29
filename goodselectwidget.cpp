@@ -91,7 +91,7 @@ void GoodSelectWidget::updateUI()
 {
     number->setText(QString::number(ncur));
     remain->setText(pref + QString::number(nremian));
-    wname->setText(QString::fromStdString(name));
+    wname->setText((name));
 }
 
 void GoodSelectWidget::showGood(QString name)
