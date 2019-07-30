@@ -11,7 +11,7 @@ GoodSelectWidget::GoodSelectWidget(QString Picname, Order *&order, QWidget *pare
         if (pcorder == porder)
         {
             number->setText(QString::number(porder->count(name)));
-            if (Business::instance().m_store.count(name)) remain->setText(QString::number(Business::instance().m_store.at(name)));
+            if (Business::instance().m_store.count(name)) remain->setText(pref + QString::number(Business::instance().m_store.at(name)));
         }
     });
     auto labellay = new QGridLayout(this);
