@@ -25,6 +25,7 @@ public:
     void closeEvent(QCloseEvent *) override;
 
     Order *porder;
+    QComboBox *orders;
 };
 
 #endif // ORDER_H

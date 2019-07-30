@@ -1,5 +1,6 @@
 #include "order.h"
 #include <QtWidgets>
+#include <QtGlobal>
 
 #include "business.h"
 #include "goodrowwidget.h"
@@ -9,11 +10,23 @@ OrderWidget::OrderWidget()
     resize(800, 600);
     auto layoutall = new QGridLayout(this);
 
+    orders = new QComboBox;
+    layoutall->addWidget(orders, 0, 0);
+
+    for (int i = 0; i< Business::instance().m_orders.size(); ++i)
+    {
+        orders->addItem("订单"+ QString::number(i+1));
+        connect(orders, (void (QComboBox::*)(int))(&QComboBox::currentIndexChanged), [this](int id)
+        {
+            loadFromOrder(Business::instance().m_orders.data() + id);
+        });
+    }
+
     QLineEdit *search = new QLineEdit("search:");
-    layoutall->addWidget(search, 0, 0, 1, 2);
+    layoutall->addWidget(search, 0, 1);
 
     QPushButton *cart = new QPushButton();
-    layoutall->addWidget(cart, 0, 2, 1, 2);
+    layoutall->addWidget(cart, 0, 2);
     connect(cart, &QPushButton::clicked, [=]()
     {
         QMenu modelMenu;
@@ -127,8 +140,11 @@ void OrderWidget::closeEvent(QCloseEvent *e)
 
 void OrderWidget::loadFromOrder(Order *order)
 {
-    porder = order;
     auto &business = Business::instance();
+
+    orders->setCurrentIndex(order - business.m_orders.data());
+    porder = order;
+
     auto it = business.m_store.begin();
     for (int i = 0;
          i< business.m_store.size();

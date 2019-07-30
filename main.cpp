@@ -23,22 +23,19 @@ int main(int argc, char *argv[])
 //        od.show();
         Business &b = Business::instance();
 
-        int curorder;
 
         QObject::connect(&w, &MainWindow::updateOrder, [&](int i)
         {
-            curorder = i;
             od.loadFromOrder(&(b.m_orders[i]));
 //            loadFromOrder(&od, b, b.m_orders[i]);
             od.show();
         });
 
-        QObject::connect(&od, &OrderWidget::updateOrder, [&]()
+        QObject::connect(&b, &Business::orderChanged, [&](Order *order)
         {
+            int id = order - b.m_orders.data();
 //            backToOrder(&od, b, b.m_orders[curorder]);
-            QString order;
-            for (auto good : b.m_orders[curorder]) order += (good + " ");
-            w.setOrderIcon(curorder, b.m_orders[curorder]);
+            w.setOrderIcon(id, *order);
 //            w.m_btnOrders[curorder]->setText(QString::fromStdString(order));
         });
 
