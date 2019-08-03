@@ -26,6 +26,7 @@ public:
 
     Order *porder;
     QComboBox *orders;
+    static std::map<QString, QPixmap> m_pixmaps;
 };
 
 #endif // ORDER_H

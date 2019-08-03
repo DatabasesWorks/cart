@@ -5,8 +5,17 @@
 #include "business.h"
 #include "goodrowwidget.h"
 
+std::map<QString, QPixmap> OrderWidget::m_pixmaps;
+
+
 OrderWidget::OrderWidget()
 {
+    for (auto name : Business::instance().m_store)
+    {
+        QImage img("./icon/goods/" + name.first+".png");
+        img = img.scaled(200,200);
+        m_pixmaps[name.first]   = (QPixmap::fromImage(img));
+    }
     resize(800, 600);
     auto layoutall = new QGridLayout(this);
 
@@ -16,14 +25,42 @@ OrderWidget::OrderWidget()
     for (int i = 0; i< Business::instance().m_orders.size(); ++i)
     {
         orders->addItem("订单"+ QString::number(i+1));
-        connect(orders, (void (QComboBox::*)(int))(&QComboBox::currentIndexChanged), [this](int id)
-        {
-            loadFromOrder(Business::instance().m_orders.data() + id);
-        });
     }
 
-    QLineEdit *search = new QLineEdit("search:");
+
+
+    QLineEdit *search = new QLineEdit("");
     layoutall->addWidget(search, 0, 1);
+
+    connect(orders, (void (QComboBox::*)(int))(&QComboBox::currentIndexChanged), [=](int id)
+    {
+        std::cerr<<"id = "<<id<<std::endl;
+        loadFromOrder(Business::instance().m_orders.data() + id);
+        emit search->textChanged(search->text());
+    });
+
+    connect(search, &QLineEdit::textChanged, [this](QString goodname)
+    {
+        if (Business::instance().m_store.count(goodname))
+        {
+            m_wgoods[0]->showGood(goodname);
+            m_wgoods[0]->updateUI();
+
+            for (int i =1; i< m_wgoods.size(); ++i) m_wgoods[i]->hide();
+        }
+        else
+        {
+            if (!goodname.isEmpty()) return;
+            int id = 0;
+            for (auto it =Business::instance().m_store.begin();
+                 it != Business::instance().m_store.end(); ++it, ++id)
+            {
+                m_wgoods[id]->showGood(it->first);
+                m_wgoods[id]->updateUI();
+                m_wgoods[id]->show();
+            }
+        }
+    });
 
     QPushButton *cart = new QPushButton();
     layoutall->addWidget(cart, 0, 2);

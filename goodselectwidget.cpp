@@ -1,5 +1,7 @@
 #include "goodselectwidget.h"
+#include "order.h"
 #include <QtWidgets>
+
 
 GoodSelectWidget::GoodSelectWidget(QString Picname, Order *&order, QWidget *parent) : QWidget(parent),
     porder(order)
@@ -109,11 +111,15 @@ void GoodSelectWidget::updateUI()
     if (Business::instance().m_store.count(name))
         remain->setText(pref + QString::number(Business::instance().m_store.at(name)));
     wname->setText((name));
+
+
+    if (OrderWidget::m_pixmaps.count(name)) pic->setPixmap(OrderWidget::m_pixmaps[name]);
 }
 
-void GoodSelectWidget::showGood(QString name)
+void GoodSelectWidget::showGood(QString goodname)
 {
-
+    name = goodname;
+//    updateUI();
 }
 
 void GoodSelectWidget::mouseReleaseEvent(QMouseEvent *)
@@ -124,4 +130,5 @@ void GoodSelectWidget::mouseReleaseEvent(QMouseEvent *)
 void GoodSelectWidget::setOrder(Order *order)
 {
     porder = order;
+//    updateUI();
 }
