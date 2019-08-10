@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
             od.loadFromOrder(&(b.m_orders[i]));
 //            loadFromOrder(&od, b, b.m_orders[i]);
             od.show();
+            od.setFixedSize(od.size());
         });
 
         QObject::connect(&b, &Business::orderChanged, [&](Order *order)

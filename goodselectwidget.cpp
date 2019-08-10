@@ -20,8 +20,10 @@ GoodSelectWidget::GoodSelectWidget(std::string goodname, Order *&order, QWidget 
 
     int id = porder - Business::instance().m_orders.data();
     QImage img = Business::m_images[QString::fromStdString(goodname)];
-    img = img.scaled(200,200);
+    img = img.scaled(200,150);
     pic = new QLabel();
+    pic->setScaledContents(true);
+    pic->setFixedSize(img.size());
     pic->setPixmap(QPixmap::fromImage(img));
 
     labellay->addWidget(pic, 0, 0, 1, 3);
@@ -102,7 +104,7 @@ GoodSelectWidget::GoodSelectWidget(std::string goodname, Order *&order, QWidget 
         }
     });
 
-    resize(200,200);
+//    resize(200,200);
 }
 
 void GoodSelectWidget::updateUI()
