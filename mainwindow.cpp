@@ -106,9 +106,9 @@ void MainWindow::setOrderIcon(int index, Order order)
     sub.fill();
     std::vector<QPixmap> goods(4, sub);
 
-//    for (int i=0; i< order.size(); ++i)
     int cnt = -1;
-    auto picked = Business::instance().m_havePicked[index];
+    Order picked;
+    if (Business::instance().lockOrder) picked = Business::instance().m_havePicked[index];
     for (QString good : order)
     {
         cnt++;
@@ -126,9 +126,20 @@ void MainWindow::setOrderIcon(int index, Order order)
 
         if (Business::instance().lockOrder && !color)
         {
-            auto img = QImage(goodpicname).scaled(150,100).convertToFormat(QImage::Format_Grayscale8);
+            auto im = QImage(goodpicname).scaled(150,100).convertToFormat(QImage::Format_ARGB32);
 
-            goods[cnt] =  QPixmap::fromImage(img);
+            for (int y = 0; y < im.height(); ++y) {
+                QRgb *scanLine = (QRgb*)im.scanLine(y);
+                for (int x = 0; x < im.width(); ++x) {
+                    QRgb pixel = *scanLine;
+                    uint ci = uint(qGray(pixel));
+                    *scanLine = qRgba(ci, ci, ci, qAlpha(pixel)/3);
+                    ++scanLine;
+                }
+            }
+//            return QPixmap::fromImage(im);
+
+            goods[cnt] =  QPixmap::fromImage(im);
         }
         else
         {
