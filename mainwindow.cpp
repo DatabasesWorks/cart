@@ -133,7 +133,7 @@ void MainWindow::setOrderIcon(int index, Order order)
                 for (int x = 0; x < im.width(); ++x) {
                     QRgb pixel = *scanLine;
                     uint ci = uint(qGray(pixel));
-                    *scanLine = qRgba(ci, ci, ci, qAlpha(pixel)/3);
+                    *scanLine = qRgba(ci, ci, ci, qAlpha(pixel));
                     ++scanLine;
                 }
             }
@@ -167,6 +167,11 @@ void MainWindow::startPick()
     Business::instance().lockOrder = true;
     Business::instance().m_havePicked.clear();
     Business::instance().m_havePicked.resize(Business::instance().m_orders.size());
+
+    for (int i=0; i<Business::instance().m_orders.size(); ++i)
+    {
+        setOrderIcon(i, Business::instance().m_orders[i]);
+    }
     auto server = new OrderServer;
     server->start();
 }
