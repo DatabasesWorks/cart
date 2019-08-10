@@ -19,8 +19,26 @@ OrderWidget::OrderWidget()
     resize(800, 600);
     auto layoutall = new QGridLayout(this);
 
+    auto top = new QHBoxLayout;
+
+    QLabel *logo = new QLabel();
+    logo->setPixmap(QPixmap::fromImage(QImage("./icon/logo.png")).scaled(36*3, 25*3, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    logo->setStyleSheet("QLabel { background-color : blue; }");
+
+    QLabel *title = new QLabel("订单中心");
+    title->setStyleSheet("QLabel { background-color : blue; }");
+    top->setSpacing(0);
+
+    top->addWidget(logo);
+    top->addWidget(title);
+    layoutall->addLayout(top,0,0,1,3);
+
+    int row = 0;
+
+
+    row++;
     orders = new QComboBox;
-    layoutall->addWidget(orders, 0, 0);
+    layoutall->addWidget(orders, row, 0);
 
     for (int i = 0; i< Business::instance().m_orders.size(); ++i)
     {
@@ -30,7 +48,7 @@ OrderWidget::OrderWidget()
 
 
     QLineEdit *search = new QLineEdit("");
-    layoutall->addWidget(search, 0, 1);
+    layoutall->addWidget(search, row, 1);
 
     connect(orders, (void (QComboBox::*)(int))(&QComboBox::currentIndexChanged), [=](int id)
     {
@@ -63,7 +81,7 @@ OrderWidget::OrderWidget()
     });
 
     QPushButton *cart = new QPushButton();
-    layoutall->addWidget(cart, 0, 2);
+    layoutall->addWidget(cart, row, 2);
     connect(cart, &QPushButton::clicked, [=]()
     {
         QMenu modelMenu;
@@ -96,12 +114,13 @@ OrderWidget::OrderWidget()
 
     });
 
+    row++;
     auto left = new QPushButton("<");
     auto right = new QPushButton(">");
     auto central = new QStackedWidget;
-    layoutall->addWidget(left,1,0);
-    layoutall->addWidget(right,1,2);
-    layoutall->addWidget(central,1,1);
+    layoutall->addWidget(left,row,0);
+    layoutall->addWidget(right,row,2);
+    layoutall->addWidget(central,row,1);
 
     connect(left, &QPushButton::clicked, [=]()
     {

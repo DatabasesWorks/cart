@@ -7,12 +7,33 @@ MainWindow::MainWindow(QWidget *parent)
 {
     resize(800, 600);
     auto layoutall = new QGridLayout(this);
+
+    auto top = new QHBoxLayout;
+
+    QLabel *logo = new QLabel();
+//    logo->setFixedSize(144, 100);
+    logo->setPixmap(QPixmap::fromImage(QImage("./icon/logo.png")).scaled(36*3, 25*3, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    logo->setStyleSheet("QLabel { background-color : blue; }");
+
+    QLabel *title = new QLabel("订单中心");
+    title->setStyleSheet("QLabel { background-color : blue; }");
+    top->setSpacing(0);
+
+    top->addWidget(logo);
+    top->addWidget(title);
+    layoutall->addLayout(top,0,0,1,3);
+
+    int row = 0;
+
+
+    row++;
+
     auto left = new QPushButton("<");
     auto right = new QPushButton(">");
     auto central = new QStackedWidget;
-    layoutall->addWidget(left,0,0);
-    layoutall->addWidget(right,0,2);
-    layoutall->addWidget(central,0,1);
+    layoutall->addWidget(left,row,0);
+    layoutall->addWidget(right,row,2);
+    layoutall->addWidget(central,row,1);
 
     connect(left, &QPushButton::clicked, [=]()
     {
