@@ -125,11 +125,6 @@ void MainWindow::setOrderIcon(int index, Order order)
             picked.erase(picked.find(good));
         }
 
-
-//        auto goodpicname = "./icon/goods/" +
-//                (good)+".png";
-
-
         if (Business::instance().lockOrder && !color)
         {
             auto im = b.m_images[good].scaled(150,100).convertToFormat(QImage::Format_ARGB32);

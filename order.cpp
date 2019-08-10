@@ -142,15 +142,15 @@ OrderWidget::OrderWidget()
             {
                 int index = m_wgoods.size()+1;
 
-                QString goodpicname;
+                QString goodname;
 
                 if (it != Business::instance().m_store.end())
                 {
-                    goodpicname = "./icon/goods/" +
-                            (it->first)+".png";
+                    goodname =
+                            (it->first);
                     it++;
                 }
-                auto label = new GoodSelectWidget(goodpicname, porder);
+                auto label = new GoodSelectWidget(goodname.toStdString(), porder);
 
 
                 layout->addWidget(label, i, j);

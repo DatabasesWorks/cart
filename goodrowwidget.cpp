@@ -21,7 +21,7 @@ void GoodRowWidget::setGood(QString good, Order order)
     auto lay = new QHBoxLayout(this);
 
     m_goodImg = new QLabel;
-    m_goodImg->setPixmap(QPixmap::fromImage(QImage("./icon/goods/"+goodQstr+".png").scaled(100,100)));
+    m_goodImg->setPixmap(QPixmap::fromImage(Business::m_images[goodQstr].scaled(100,100)));
     m_goodImg->setFixedSize(100,100);
 
     m_goodName = new QLabel(goodQstr);

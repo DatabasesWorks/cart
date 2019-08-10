@@ -3,7 +3,7 @@
 #include <QtWidgets>
 
 
-GoodSelectWidget::GoodSelectWidget(QString Picname, Order *&order, QWidget *parent) : QWidget(parent),
+GoodSelectWidget::GoodSelectWidget(std::string goodname, Order *&order, QWidget *parent) : QWidget(parent),
     porder(order)
 {
     porder = order;
@@ -19,7 +19,7 @@ GoodSelectWidget::GoodSelectWidget(QString Picname, Order *&order, QWidget *pare
     auto labellay = new QGridLayout(this);
 
     int id = porder - Business::instance().m_orders.data();
-    QImage img(Picname);
+    QImage img = Business::m_images[QString::fromStdString(goodname)];
     img = img.scaled(200,200);
     pic = new QLabel();
     pic->setPixmap(QPixmap::fromImage(img));
