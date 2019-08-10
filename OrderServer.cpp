@@ -15,7 +15,7 @@ void OrderServer::run()
 
     //socket
     asio::io_service io_service;
-    tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), 1234));
+    tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), 1111));
 
     std::cerr<<"======waiting for client's request======"<<std::endl;
     while(1)
@@ -30,6 +30,9 @@ void OrderServer::run()
         int len = socket.read_some(boost::asio::buffer((char*)classify.data(), classify.size()), ec);
 
         cerr<<"len ="<<len<<endl;
+        cerr<<"message ="<<ec.message()<<endl;
+
+        if (!len) continue;
 
         string res = classify.substr(0, len);
 
@@ -57,6 +60,7 @@ void OrderServer::run()
 
 
         string pos = std::to_string(orderid);
+        cerr<<"send "<<pos<<endl;
         boost::asio::write(socket, boost::asio::buffer(pos.data(), pos.size()));
 
     }

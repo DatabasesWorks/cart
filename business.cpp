@@ -62,5 +62,30 @@ void Business::orderAdd(Order *order, QString name)
 
 void Business::arrangeLeftGoods()
 {
+    std::vector<int> emptyorder;
+
+    for (int i=0; i< m_orders.size(); ++i)
+    {
+        /*if (m_orders[i].empty())*/ emptyorder.push_back(i);
+    }
+
+    for (auto it = m_store.begin(); it != m_store.end(); ++it)
+    {
+        if (emptyorder.empty()) break;
+        while (it->second)
+        {
+            it->second--;
+
+            if (m_orders[emptyorder.back()].size() < 4)
+            {
+                m_orders[emptyorder.back()].insert(it->first);
+            }
+            else {
+                emptyorder.erase(std::prev(emptyorder.end() ));
+                if (emptyorder.empty()) break;
+                m_orders[emptyorder.back()].insert(it->first);
+            }
+        }
+    }
 
 }
