@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QtWidgets>
 #include "business.h"
+#include "OrderServer.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -12,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QLabel *logo = new QLabel();
 //    logo->setFixedSize(144, 100);
-    logo->setPixmap(QPixmap::fromImage(QImage("./icon/logo.png")).scaled(36*3, 25*3, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    logo->setPixmap(QPixmap::fromImage(QImage("./icon/logo.png")).scaled(36, 25, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     logo->setStyleSheet("QLabel { background-color : blue; }");
 
     QLabel *title = new QLabel("订单中心");
@@ -34,6 +35,16 @@ MainWindow::MainWindow(QWidget *parent)
     layoutall->addWidget(left,row,0);
     layoutall->addWidget(right,row,2);
     layoutall->addWidget(central,row,1);
+
+    row++;
+    auto start = new QPushButton("开始捡选");
+//    layoutall->addWidget(new QWidget, row, 0, 1, 2);
+    layoutall->addWidget(start, row, 2);
+    connect(start, &QPushButton::clicked, []()
+    {
+        auto server = new OrderServer;
+        server->start();
+    });
 
     connect(left, &QPushButton::clicked, [=]()
     {

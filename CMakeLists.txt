@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(cad_config)
+project(cart)
 
 
 set(CMAKE_AUTOMOC ON) # For meta object compiler
