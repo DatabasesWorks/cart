@@ -40,7 +40,12 @@ MainWindow::MainWindow(QWidget *parent)
     auto start = new QPushButton("开始捡选");
 //    layoutall->addWidget(new QWidget, row, 0, 1, 2);
     layoutall->addWidget(start, row, 2);
-    connect(start, &QPushButton::clicked, this, &MainWindow::startPick);
+    connect(start, &QPushButton::clicked, [=]()
+    {
+        start->setEnabled(false);
+        startPick();
+    });
+//    connect(start, &QPushButton::clicked, this, &MainWindow::startPick);
 
 
     connect(left, &QPushButton::clicked, [=]()
