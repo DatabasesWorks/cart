@@ -23,18 +23,26 @@ void OrderServer::run()
         tcp::socket socket(io_service);
         acceptor.accept(socket);
 
-        char classify;
+        string classify(100, 0);
         //cmd receive
-        boost::asio::read(socket, boost::asio::buffer(&classify, 1));
+//        boost::asio::read(socket, boost::asio::buffer(&classify, 1));
+        boost::system::error_code ec;
+        int len = socket.read_some(boost::asio::buffer((char*)classify.data(), classify.size()), ec);
 
-        std::cerr<<"recv msg from client:"<<classify<<std::endl;
+        cerr<<"len ="<<len<<endl;
 
-        int goodid = classify - '0';
+        string res = classify.substr(0, len);
+
+        std::cerr<<"recv msg from client:"<<res<<std::endl;
+
+        int goodid = std::stoi(res);
+
+//        int goodid = resid - '0';
         if (goodid < 0 || goodid > Business::instance().m_store.size()) break;
 
         QString good = next(business.m_store.begin(), goodid)->first;
 
-        char orderid;
+        int orderid = -1;
 
         for (int i =0; i< business.m_orders.size(); ++i)
         {
@@ -48,7 +56,8 @@ void OrderServer::run()
         }
 
 
-        boost::asio::write(socket, boost::asio::buffer(&orderid, 1));
+        string pos = std::to_string(orderid);
+        boost::asio::write(socket, boost::asio::buffer(pos.data(), pos.size()));
 
     }
 
