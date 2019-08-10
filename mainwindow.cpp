@@ -105,6 +105,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setOrderIcon(int index, Order order)
 {
+    auto &b = Business::instance();
     QPixmap all(300, 200);
     all.fill();
     QPixmap sub(150, 100);
@@ -125,13 +126,13 @@ void MainWindow::setOrderIcon(int index, Order order)
         }
 
 
-        auto goodpicname = "./icon/goods/" +
-                (good)+".png";
+//        auto goodpicname = "./icon/goods/" +
+//                (good)+".png";
 
 
         if (Business::instance().lockOrder && !color)
         {
-            auto im = QImage(goodpicname).scaled(150,100).convertToFormat(QImage::Format_ARGB32);
+            auto im = b.m_images[good].scaled(150,100).convertToFormat(QImage::Format_ARGB32);
 
             for (int y = 0; y < im.height(); ++y) {
                 QRgb *scanLine = (QRgb*)im.scanLine(y);
@@ -148,7 +149,7 @@ void MainWindow::setOrderIcon(int index, Order order)
         }
         else
         {
-            goods[cnt] = QPixmap::fromImage(QImage(goodpicname).scaled(150,100));
+            goods[cnt] = QPixmap::fromImage(b.m_images[good].scaled(150,100));
         }
     }
 

@@ -34,6 +34,9 @@ public:
 
     std::vector< Order > m_havePicked;
     bool lockOrder = false;
+
+    static std::map<QString, QImage> m_images;
+
 };
 
 #endif // BUSINESS_H

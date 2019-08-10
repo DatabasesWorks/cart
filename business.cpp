@@ -2,6 +2,9 @@
 #include <QDir>
 #include <QtWidgets>
 
+std::map<QString, QImage> Business::m_images;
+
+
 Business &Business::instance()
 {
     static Business b;
@@ -12,6 +15,13 @@ Business::Business()
 {
     initStore();
     m_orders.resize(size);
+
+    for (auto name : m_store)
+    {
+        QImage img("./icon/goods/" + name.first+".png");
+        img = img.scaled(200,200);
+        m_images[name.first]   = img;//(QPixmap::fromImage(img));
+    }
 }
 
 void Business::initStore()

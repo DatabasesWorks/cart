@@ -113,7 +113,8 @@ void GoodSelectWidget::updateUI()
     wname->setText((name));
 
 
-    if (OrderWidget::m_pixmaps.count(name)) pic->setPixmap(OrderWidget::m_pixmaps[name]);
+    if (Business::m_images.count(name))
+        pic->setPixmap(QPixmap::fromImage(Business::m_images[name]));
 }
 
 void GoodSelectWidget::showGood(QString goodname)

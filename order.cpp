@@ -5,17 +5,11 @@
 #include "business.h"
 #include "goodrowwidget.h"
 
-std::map<QString, QPixmap> OrderWidget::m_pixmaps;
 
 
 OrderWidget::OrderWidget()
 {
-    for (auto name : Business::instance().m_store)
-    {
-        QImage img("./icon/goods/" + name.first+".png");
-        img = img.scaled(200,200);
-        m_pixmaps[name.first]   = (QPixmap::fromImage(img));
-    }
+
     resize(800, 600);
     auto layoutall = new QGridLayout(this);
 
