@@ -17,6 +17,8 @@ public:
     void orderSub(Order *order, QString name);
     void orderAdd(Order *order, QString name);
 
+    void arrangeLeftGoods();
+
 private:
     Business();
     void initStore();
@@ -31,6 +33,7 @@ public:
     std::vector< Order > m_orders;
 
     std::vector< Order > m_havePicked;
+    bool lockOrder = false;
 };
 
 #endif // BUSINESS_H

@@ -33,6 +33,7 @@ void Business::initStore()
 
 void Business::orderSub(Order *order, QString name)
 {
+    if (lockOrder) return;
     int id = order - m_orders.data();
     std::cerr<<"order "<<id<<" sub "<<name.toStdString()<<std::endl;
     {
@@ -47,6 +48,7 @@ void Business::orderSub(Order *order, QString name)
 
 void Business::orderAdd(Order *order, QString name)
 {
+    if (lockOrder) return;
     if (order->size()>=4)
     {
         QMessageBox::information(nullptr, "Overflow", "Too many goods!\n"
@@ -56,4 +58,9 @@ void Business::orderAdd(Order *order, QString name)
     order->insert(name);
     m_store[name]--;
     emit orderChanged(order);
+}
+
+void Business::arrangeLeftGoods()
+{
+
 }

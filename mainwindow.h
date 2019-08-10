@@ -13,6 +13,8 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void setOrderIcon(int index, Order order);
+
+    void startPick();
 signals:
     void updateOrder(int);
 public:

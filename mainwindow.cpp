@@ -40,11 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
     auto start = new QPushButton("开始捡选");
 //    layoutall->addWidget(new QWidget, row, 0, 1, 2);
     layoutall->addWidget(start, row, 2);
-    connect(start, &QPushButton::clicked, []()
-    {
-        auto server = new OrderServer;
-        server->start();
-    });
+    connect(start, &QPushButton::clicked, this, &MainWindow::startPick);
+
 
     connect(left, &QPushButton::clicked, [=]()
     {
@@ -111,16 +108,32 @@ void MainWindow::setOrderIcon(int index, Order order)
 
 //    for (int i=0; i< order.size(); ++i)
     int cnt = -1;
+    auto picked = Business::instance().m_havePicked[index];
     for (QString good : order)
     {
         cnt++;
-        int id = std::distance(Business::instance().m_store.begin(),
-                               Business::instance().m_store.find(good));
+        bool color = false;
+        if (picked.count(good))
+        {
+            color = true;
+            picked.erase(picked.find(good));
+        }
+
 
         auto goodpicname = "./icon/goods/" +
                 (good)+".png";
 
-        goods[cnt] = QPixmap::fromImage(QImage(goodpicname).scaled(150,100));
+
+        if (Business::instance().lockOrder && !color)
+        {
+            auto img = QImage(goodpicname).scaled(150,100).convertToFormat(QImage::Format_Grayscale8);
+
+            goods[cnt] =  QPixmap::fromImage(img);
+        }
+        else
+        {
+            goods[cnt] = QPixmap::fromImage(QImage(goodpicname).scaled(150,100));
+        }
     }
 
     QPainter painter(&all);
@@ -135,4 +148,14 @@ void MainWindow::setOrderIcon(int index, Order order)
     m_btnOrders[index]->setText("");
     m_btnOrders[index]->setIcon(QIcon(all));
     m_btnOrders[index]->setIconSize(QSize(300, 200));
+}
+
+void MainWindow::startPick()
+{
+    Business::instance().arrangeLeftGoods();
+    Business::instance().lockOrder = true;
+    Business::instance().m_havePicked.clear();
+    Business::instance().m_havePicked.resize(Business::instance().m_orders.size());
+    auto server = new OrderServer;
+    server->start();
 }
