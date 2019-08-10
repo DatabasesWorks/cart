@@ -86,15 +86,19 @@ void Business::arrangeLeftGoods()
         {
             it->second--;
 
-            if (m_orders[emptyorder.back()].size() < 4)
+            while(m_orders[emptyorder.back()].size() >= 4)
+            {
+                emptyorder.erase(std::prev(emptyorder.end() ));
+                if (emptyorder.empty()) break;
+            }
+
+            if (emptyorder.empty()) break;
+
+
             {
                 m_orders[emptyorder.back()].insert(it->first);
             }
-            else {
-                emptyorder.erase(std::prev(emptyorder.end() ));
-                if (emptyorder.empty()) break;
-                m_orders[emptyorder.back()].insert(it->first);
-            }
+
         }
     }
 
