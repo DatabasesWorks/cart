@@ -150,7 +150,7 @@ OrderWidget::OrderWidget()
                             (it->first);
                     it++;
                 }
-                auto label = new GoodSelectWidget(goodname.toStdString(), porder);
+                auto label = new GoodSelectWidget(goodname, porder);
 
 
                 layout->addWidget(label, i, j);

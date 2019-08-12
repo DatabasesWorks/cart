@@ -8,7 +8,7 @@ class GoodSelectWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GoodSelectWidget(std::string goodname, Order *&porder, QWidget *parent = nullptr);
+    explicit GoodSelectWidget(QString goodname, Order *&porder, QWidget *parent = nullptr);
     void updateUI();
 
     void showGood(QString name);
