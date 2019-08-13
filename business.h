@@ -28,7 +28,7 @@ signals:
     void orderChanged(Order* order);
 
 public:
-    const int size = 20;
+    const int size = 15;
     std::map<QString, int> m_store;
     std::map<QString, QString> m_fullname;
     std::map<QString, int> m_ids;

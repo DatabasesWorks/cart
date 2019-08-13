@@ -62,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
             central->setCurrentIndex(id+1);
     });
 
-    for (int stackid = 0; stackid < 3; ++stackid)
+    for (int stackid = 0; stackid < (Business::instance().size-1)/9 +1; ++stackid)
     {
         auto widget = new QWidget;
         central->addWidget(widget);
@@ -90,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent)
 
                     connect(btn, &QPushButton::clicked, [=]()
                     {
-                        emit updateOrder(index);
+                        if (!Business::instance().lockOrder) emit updateOrder(index);
                     });
                 }
             }
