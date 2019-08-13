@@ -51,6 +51,7 @@ void OrderServer::run()
 
 
 
+        wclassify->id = -1;
         while(wclassify->id == -1)
         {
             wclassify->show();
