@@ -44,10 +44,10 @@ void Business::initStore()
             int p2 = all.find('_', p1+1);
 
             wstring id = all.substr(0, p1);
-            wstring main = all.substr(p1+1, p2);
+            wstring main = all.substr(p1+1, p2-p1-1);
             wstring cnt = all.substr(p2+1);
-            m_store.insert({QString::fromStdWString(main), cnt});
-            m_ids.insert({QString::fromStdWString(main), id});
+            m_store.insert({QString::fromStdWString(main), stoi(cnt)});
+            m_ids.insert({QString::fromStdWString(main), stoi(id)});
             m_fullname.insert({QString::fromStdWString(main), qall});
         }
     }

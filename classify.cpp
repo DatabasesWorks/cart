@@ -9,7 +9,7 @@ ClassifyWidget::ClassifyWidget()
     for (int i=0; i<3; ++i)
         for (int j=0; j<5; ++j)
         {
-            auto it = std::next(b.m_store.begin(), 3*i + j);
+            auto it = std::next(b.m_store.begin(), 5*i + j);
             auto btn = new QPushButton;
 
 
@@ -17,7 +17,7 @@ ClassifyWidget::ClassifyWidget()
             btn->setIconSize(QSize(100,100));
             connect(btn, &QPushButton::clicked, [=]()
             {
-                id = 3*i + j;
+                id = 5*i + j;
             });
             lay->addWidget(btn, i, j);
         }
