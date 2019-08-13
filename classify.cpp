@@ -11,12 +11,14 @@ ClassifyWidget::ClassifyWidget()
         {
             auto it = std::next(b.m_store.begin(), 3*i + j);
             auto btn = new QPushButton;
-            btn->setIcon(QIcon(QPixmap::fromImage(b.m_images[it->first])));
+
+
+            btn->setIcon(QIcon(QPixmap::fromImage(b.m_images[it->first]).scaled(100,100)));
+            btn->setIconSize(QSize(100,100));
             connect(btn, &QPushButton::clicked, [=]()
             {
                 id = 3*i + j;
             });
-            btn->setMinimumSize(100,100);
             lay->addWidget(btn, i, j);
         }
 
