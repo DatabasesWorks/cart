@@ -4,6 +4,8 @@
 
 std::map<QString, QImage> Business::m_images;
 
+using namespace std;
+
 
 Business &Business::instance()
 {
@@ -18,7 +20,7 @@ Business::Business()
 
     for (auto name : m_store)
     {
-        QImage img("./icon/goods/" + name.first+".png");
+        QImage img("../icon/goods/" + m_fullname[name.first]+".png");
         img = img.scaled(200,200);
         m_images[name.first]   = img;//(QPixmap::fromImage(img));
     }
@@ -26,7 +28,7 @@ Business::Business()
 
 void Business::initStore()
 {
-    QDir dirOfGoods("./icon/goods");
+    QDir dirOfGoods("../icon/goods");
 
     QStringList list = dirOfGoods.entryList();
 
@@ -34,8 +36,19 @@ void Business::initStore()
     {
         if (file.endsWith(".png", Qt::CaseInsensitive))
         {
-            QString main = file.left(file.size()-4);
-            m_store.insert({main, 5});
+            QString qall = file.left(file.size()-4);
+
+            wstring all = qall.toStdWString();
+
+            int p1 = all.find('_');
+            int p2 = all.find('_', p1+1);
+
+            wstring id = all.substr(0, p1);
+            wstring main = all.substr(p1+1, p2);
+            wstring cnt = all.substr(p2+1);
+            m_store.insert({QString::fromStdWString(main), cnt});
+            m_ids.insert({QString::fromStdWString(main), id});
+            m_fullname.insert({QString::fromStdWString(main), qall});
         }
     }
 

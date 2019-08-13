@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QLabel *logo = new QLabel();
 //    logo->setFixedSize(144, 100);
-    logo->setPixmap(QPixmap::fromImage(QImage("./icon/logo.png")).scaled(36, 25, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    logo->setPixmap(QPixmap::fromImage(QImage("../icon/logo.png")).scaled(36, 25, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     logo->setStyleSheet("QLabel { background-color : blue; }");
 
     QLabel *title = new QLabel("订单中心");

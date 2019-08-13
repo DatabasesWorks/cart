@@ -16,7 +16,7 @@ OrderWidget::OrderWidget()
     auto top = new QHBoxLayout;
 
     QLabel *logo = new QLabel();
-    logo->setPixmap(QPixmap::fromImage(QImage("./icon/logo.png")).scaled(36*3, 25*3, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    logo->setPixmap(QPixmap::fromImage(QImage("../icon/logo.png")).scaled(36*3, 25*3, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     logo->setStyleSheet("QLabel { background-color : blue; }");
 
     QLabel *title = new QLabel("订单中心");

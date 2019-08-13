@@ -48,8 +48,8 @@ void GoodRowWidget::setGood(QString good, Order order)
         btn->setIconSize(QSize(30, 30));
     };
 
-    seticon(m_sub, "./icon/sub.png");
-    seticon(m_add, "./icon/add.png");
+    seticon(m_sub, "../icon/sub.png");
+    seticon(m_add, "../icon/add.png");
 
     setRound(m_sub);
     setRound(m_add);

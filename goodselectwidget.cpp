@@ -77,8 +77,8 @@ GoodSelectWidget::GoodSelectWidget(QString goodname, Order *&order, QWidget *par
         btn->setIconSize(QSize(30, 30));
     };
 
-    seticon(left, "./icon/sub.png");
-    seticon(right, "./icon/add.png");
+    seticon(left, "../icon/sub.png");
+    seticon(right, "../icon/add.png");
 
 
     connect(left, &QPushButton::clicked, [=]()
