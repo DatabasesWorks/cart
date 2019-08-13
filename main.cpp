@@ -3,7 +3,6 @@
 #include "order.h"
 //#include "bridge.h"
 
-#include "norwegianwoodstyle.h"
 
 int main(int argc, char *argv[])
 {
