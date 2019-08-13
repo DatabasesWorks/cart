@@ -1,5 +1,6 @@
 #include "OrderServer.h"
 #include "business.h"
+#include "classify.h"
 #include <iostream>
 
 #include <boost/array.hpp>
@@ -9,6 +10,13 @@ using boost::asio::ip::tcp;
 
 using namespace  std;
 
+OrderServer::OrderServer()
+{
+    wclassify = new ClassifyWidget;
+    wclassify->show();
+//    connect(this, &OrderServer::show, wclassify, )
+}
+
 void OrderServer::run()
 {
     auto &business = Business::instance();
@@ -16,6 +24,8 @@ void OrderServer::run()
     //socket
     asio::io_service io_service;
     tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), 1111));
+
+
 
     std::cerr<<"======waiting for client's request======"<<std::endl;
     while(1)
@@ -37,8 +47,20 @@ void OrderServer::run()
         string res = classify.substr(0, len);
 
         std::cerr<<"recv msg from client:"<<res<<std::endl;
-
         int goodid = std::stoi(res);
+
+
+
+        while(wclassify->id == -1)
+        {
+            wclassify->show();
+            usleep(100000);
+        }
+        goodid = wclassify->id;
+        wclassify->id = -1;
+        wclassify->hide();
+
+
 
 //        int goodid = resid - '0';
         if (goodid < 0 || goodid > Business::instance().m_store.size()) break;
