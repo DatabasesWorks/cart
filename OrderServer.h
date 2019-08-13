@@ -9,4 +9,7 @@ public:
     OrderServer();
     void run() override;
     ClassifyWidget *wclassify;
+
+signals:
+    void showClassify(bool vis);
 };

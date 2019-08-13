@@ -14,7 +14,7 @@ OrderServer::OrderServer()
 {
     wclassify = new ClassifyWidget;
     wclassify->show();
-//    connect(this, &OrderServer::show, wclassify, )
+    connect(this, &OrderServer::showClassify, wclassify, &ClassifyWidget::setVisible);
 }
 
 void OrderServer::run()
@@ -54,12 +54,12 @@ void OrderServer::run()
         wclassify->id = -1;
         while(wclassify->id == -1)
         {
-            wclassify->show();
+            emit showClassify(true);
             usleep(100000);
         }
         goodid = wclassify->id -1;
         wclassify->id = -1;
-        wclassify->hide();
+        emit showClassify(false);
 
         int orderid = -1;
         if (goodid == -1)
