@@ -17,8 +17,10 @@ ClassifyWidget::ClassifyWidget()
                 auto btn = new QPushButton;
 
 
-//                btn->setIcon(QIcon(QPixmap::fromImage(b.m_images[it->first]).scaled(100,100)));
-//                btn->setIconSize(QSize(100,100));
+                auto ico = new QPixmap(100,100);
+                ico->fill(Qt::transparent);
+                btn->setIcon(QIcon( *ico ));
+                btn->setIconSize(QSize(100,100));
                 connect(btn, &QPushButton::clicked, [=]()
                 {
                     id = 0;
