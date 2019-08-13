@@ -57,32 +57,38 @@ void OrderServer::run()
             wclassify->show();
             usleep(100000);
         }
-        goodid = wclassify->id;
+        goodid = wclassify->id -1;
         wclassify->id = -1;
         wclassify->hide();
 
-
-
-//        int goodid = resid - '0';
-        if (goodid < 0 || goodid > Business::instance().m_store.size()) break;
-
-        QString good = next(business.m_store.begin(), goodid)->first;
-
         int orderid = -1;
-
-        for (int i =0; i< business.m_orders.size(); ++i)
+        if (goodid == -1)
         {
-            if (business.m_orders[i].count(good) > business.m_havePicked[i].count(good))
+            orderid = -1;
+        }
+        else
+        {
+            //        int goodid = resid - '0';
+            if (goodid < 0 || goodid > Business::instance().m_store.size()) break;
+
+            QString good = next(business.m_store.begin(), goodid)->first;
+
+
+
+            for (int i =0; i< business.m_orders.size(); ++i)
             {
-                orderid = i;
-                business.m_havePicked[i].insert(good);
-                emit business.orderChanged(business.m_orders.data() + orderid);
-                break;
+                if (business.m_orders[i].count(good) > business.m_havePicked[i].count(good))
+                {
+                    orderid = i;
+                    business.m_havePicked[i].insert(good);
+                    emit business.orderChanged(business.m_orders.data() + orderid);
+                    break;
+                }
             }
         }
 
 
-        string pos = std::to_string(orderid);
+        string pos = std::to_string(orderid+1);
         cerr<<"send "<<pos<<endl;
         boost::asio::write(socket, boost::asio::buffer(pos.data(), pos.size()));
 
