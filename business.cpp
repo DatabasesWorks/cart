@@ -99,9 +99,9 @@ void Business::arrangeLeftGoods()
         {
             it->second--;
 
-            while(m_orders[emptyorder.back()].size() >= 4)
+            while(m_orders[emptyorder.front()].size() >= 4)
             {
-                emptyorder.erase(std::prev(emptyorder.end() ));
+                emptyorder.erase((emptyorder.begin() ));
                 if (emptyorder.empty()) break;
             }
 
@@ -109,7 +109,7 @@ void Business::arrangeLeftGoods()
 
 
             {
-                m_orders[emptyorder.back()].insert(it->first);
+                m_orders[emptyorder.front()].insert(it->first);
             }
 
         }
