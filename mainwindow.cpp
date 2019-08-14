@@ -62,18 +62,22 @@ MainWindow::MainWindow(QWidget *parent)
             central->setCurrentIndex(id+1);
     });
 
-    for (int stackid = 0; stackid < (Business::instance().size-1)/9 +1; ++stackid)
+    int height = 4;
+    int width = 4;
+
+    int cnt = height*width;
+    for (int stackid = 0; stackid < (Business::instance().size-1)/cnt +1; ++stackid)
     {
         auto widget = new QWidget;
         central->addWidget(widget);
         auto *layout = new QGridLayout(widget);
-        for (int i=0; i< 3; ++i)
-            for (int j =0; j<3; ++j)
+        for (int i=0; i< height; ++i)
+            for (int j =0; j<width; ++j)
             {
-                auto btn = new QPushButton(QString::number(stackid*9 + i*3 +j));
+                auto btn = new QPushButton(QString::number(stackid*cnt + i*width +j));
                 QSizePolicy sp_retain = btn->sizePolicy();
 //                sp_retain.setHorizontalStretch();
-                btn->setMinimumSize(300,200);
+                btn->setMinimumSize(200,150);
                 layout->addWidget(btn, i, j);
 
                 int index = m_btnOrders.size();
@@ -105,10 +109,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::setOrderIcon(int index, Order order)
 {
+    int width = m_btnOrders[index]->width();
+    int height = m_btnOrders[index]->height();
     auto &b = Business::instance();
-    QPixmap all(300, 200);
+    QPixmap all(width, height);
     all.fill();
-    QPixmap sub(150, 100);
+    QPixmap sub(width/2, height/2);
     sub.fill();
     std::vector<QPixmap> goods(4, sub);
 
@@ -127,7 +133,7 @@ void MainWindow::setOrderIcon(int index, Order order)
 
         if (Business::instance().lockOrder && !color)
         {
-            auto im = b.m_images[good].scaled(150,100).convertToFormat(QImage::Format_ARGB32);
+            auto im = b.m_images[good].scaled(width/2, height/2).convertToFormat(QImage::Format_ARGB32);
 
             for (int y = 0; y < im.height(); ++y) {
                 QRgb *scanLine = (QRgb*)im.scanLine(y);
@@ -144,22 +150,22 @@ void MainWindow::setOrderIcon(int index, Order order)
         }
         else
         {
-            goods[cnt] = QPixmap::fromImage(b.m_images[good].scaled(150,100));
+            goods[cnt] = QPixmap::fromImage(b.m_images[good].scaled(width/2, height/2));
         }
     }
 
     QPainter painter(&all);
     for (int i=0; i<4; ++i)
     {
-        QRectF target = QRectF((i%2)*150, i/2*100, 150, 100);
-        painter.drawPixmap(target, goods[i], QRectF(0,0,150,100));
+        QRectF target = QRectF((i%2)*width/2, i/2*height/2, width/2, height/2);
+        painter.drawPixmap(target, goods[i], QRectF(0,0,width/2, height/2));
     }
 
 
 
     m_btnOrders[index]->setText("");
     m_btnOrders[index]->setIcon(QIcon(all));
-    m_btnOrders[index]->setIconSize(QSize(300, 200));
+    m_btnOrders[index]->setIconSize(QSize(width, height));
 }
 
 void MainWindow::startPick()
