@@ -97,7 +97,7 @@ void Business::arrangeLeftGoods()
         if (emptyorder.empty()) break;
         while (it->second)
         {
-            it->second--;
+
 
             while(m_orders[emptyorder.front()].size() >= 4)
             {
@@ -115,6 +115,7 @@ void Business::arrangeLeftGoods()
 
 
             {
+                it->second--;
                 m_orders[emptyorder.front()].insert(it->first);
             }
 
