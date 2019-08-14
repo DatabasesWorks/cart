@@ -89,7 +89,7 @@ void Business::arrangeLeftGoods()
 
     for (int i=0; i< m_orders.size(); ++i)
     {
-        /*if (m_orders[i].empty())*/ emptyorder.push_back(i);
+        if (m_orders[i].empty()) emptyorder.push_back(i);
     }
 
     for (auto it = m_store.begin(); it != m_store.end(); ++it)
@@ -105,7 +105,13 @@ void Business::arrangeLeftGoods()
                 if (emptyorder.empty()) break;
             }
 
-            if (emptyorder.empty()) break;
+            if (emptyorder.empty())
+            {
+                QMessageBox::information(nullptr, "Overflow", "Too many goods!\n"
+                                                              "Some goods will be discarded.");
+
+                break;
+            }
 
 
             {
